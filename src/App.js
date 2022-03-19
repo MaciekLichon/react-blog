@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 
-function App() {
+import Home from './components/pages/Home/Home';
+import About from './components/pages/About/About';
+import PostAdd from './components/pages/PostAdd/PostAdd';
+import PostEdit from './components/pages/PostEdit/PostEdit';
+import Post from './components/pages/Post/Post';
+import NotFound from './components/pages/NotFound/NotFound';
+
+import Header from './components/views/Header/Header';
+import Footer from './components/views/Footer/Footer';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/post/:id" element={<Post />} />
+        <Route path="/post/add" element={<PostAdd />} />
+        <Route path="/post/edit/:id" element={<PostEdit />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer />
+    </Container>
   );
-}
+};
 
 export default App;
