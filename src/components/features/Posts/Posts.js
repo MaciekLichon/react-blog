@@ -16,7 +16,7 @@ const Posts = () => {
       </div>
       <Row xs={1} sm={2} md={3} className="g-4">
         {posts.map(post => (
-          <Col>
+          <Col key={post.id}>
             <Card className="p-3 align-items-start">
               <Card.Title className="fw-bold">{post.title}</Card.Title>
               <Card.Subtitle className="mt-1">

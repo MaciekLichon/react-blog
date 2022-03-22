@@ -1,8 +1,8 @@
+import EditPostForm from '../../features/EditPostForm/EditPostForm';
+
 const PostEdit = () => {
   return (
-    <div>
-      PostEdit
-    </div>
+    <EditPostForm />
   );
 };
 
