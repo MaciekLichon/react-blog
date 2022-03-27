@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { getAllCategories } from '../../../redux/categoriesRedux';
-import { Card, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 const Categories = () => {
@@ -14,7 +14,7 @@ const Categories = () => {
       </div>
       {categories.map(category => (
         <Card key={categories.indexOf(category)} className="p-2">
-          <Card.Link as={NavLink} to={`/categories/${category.toLowerCase()}`}>{category}</Card.Link>
+          <Card.Link as={NavLink} to={`/categories/${category}`}>{category}</Card.Link>
         </Card>
       ))}
     </div>

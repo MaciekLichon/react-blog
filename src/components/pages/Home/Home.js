@@ -7,7 +7,7 @@ import { getAllPosts } from '../../../redux/postsRedux';
 const Home = () => {
 
   const posts = useSelector(getAllPosts);
-
+  
   return (
     <>
       <div className="d-flex justify-content-between mb-4">

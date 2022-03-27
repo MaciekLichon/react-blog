@@ -6,9 +6,11 @@ import Posts from '../../features/Posts/Posts';
 const PostsCategorized = () => {
 
   const { postCategory } = useParams();
+  console.log(postCategory);
   const filteredPosts = useSelector(state => getPostByCategory(state, postCategory));
+  console.log(filteredPosts);
 
-  if(filteredPosts.length == 0) return <p>No posts in this category...</p>
+  if(filteredPosts.length === 0) return <p>No posts in this category...</p>
     return (
       <>
         <div className="d-flex justify-content-between mb-4">
