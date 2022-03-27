@@ -44,6 +44,10 @@ const Post = () => {
             <span className="fw-bold">Published: </span>
             <span className="fw-normal">{dateToStr(postData.publishedDate)}</span>
           </Card.Subtitle>
+          <Card.Subtitle className="mt-1">
+            <span className="fw-bold">Category: </span>
+            <span className="fw-normal">{postData.category}</span>
+          </Card.Subtitle>
           {/* <Card.Text className="mt-4">{postData.content}</Card.Text> */}
           <Card.Text className="mt-4" dangerouslySetInnerHTML={{ __html: postData.content }}/>
         </div>

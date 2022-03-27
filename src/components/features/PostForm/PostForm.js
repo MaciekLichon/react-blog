@@ -5,6 +5,8 @@ import 'react-quill/dist/quill.snow.css';
 import DatePicker from "react-datepicker"; // date picker
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form"; // walidacja formularza
+import { getAllCategories } from '../../../redux/categoriesRedux';
+import { useSelector } from 'react-redux';
 
 const PostForm = ({action, actionText, ...props}) => {
 
@@ -13,6 +15,7 @@ const PostForm = ({action, actionText, ...props}) => {
   const [publishedDate, setPublishedDate] = useState(props.publishedDate || '');
   const [shortDescription, setShortDescription] = useState(props.shortDescription || '');
   const [content, setContent] = useState(props.content || '');
+  const [category, setCategory] = useState(props.category || '');
 
   // 2 nowe stany dla errorow, ktorych nie mozna bylo zwalidowac przez useForm ze wzgledu na wykorzystanie komponentow z innych paczek
   const [dateError, setDateError] = useState(false);
@@ -23,11 +26,13 @@ const PostForm = ({action, actionText, ...props}) => {
     setDateError(!publishedDate);
     setContentError(!content);
     if(content && publishedDate) {
-      action({title, shortDescription, content, publishedDate, author});
+      action({title, shortDescription, content, publishedDate, author, category});
     }
   }
 
-  const { register, handleSubmit: validate, formState: { errors } } = useForm();
+  const { register, handleSubmit: validate, formState: { errors } } = useForm(); // walidacja formularza
+
+  const categories = useSelector(getAllCategories);
 
   return (
     <Form className="col-6 m-auto" onSubmit={validate(handleSubmit)}>
@@ -60,6 +65,22 @@ const PostForm = ({action, actionText, ...props}) => {
         <Form.Label>Published</Form.Label>
         <DatePicker selected={publishedDate} onChange={(date:Date) => setPublishedDate(date)} />
         {dateError && <small className="d-block form-text text-danger mt-2">This field is required</small>}
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Category</Form.Label>
+        <Form.Control
+          {...register("category", { required: true, validate: value => value !== 'Select category...' })}
+          as="select"
+          value={category}
+          onChange={e => setCategory(e.target.value)}
+        >
+          <option>Select category...</option>
+          {categories.map(category => (
+            <option key={categories.indexOf(category)}>{category}</option>
+          ))}
+        </Form.Control>
+        {errors.category && <small className="d-block form-text text-danger mt-2">Select a category</small>}
       </Form.Group>
 
       <Form.Group className="mb-3">
